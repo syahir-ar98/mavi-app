@@ -5,6 +5,7 @@ import os
 import ssl
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from gevent.pywsgi import WSGIServer
 
 
 def allowSelfSignedHttps(allowed):
@@ -29,8 +30,8 @@ def runModel():
 
     global value1
     global input1
-    # global input2
-    # global input3
+    global input2
+    global input3
 
     if(request.method == "POST"):
 
@@ -94,3 +95,6 @@ def runModel():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # http_server = WSGIServer(('', 5000), app)
+    # http_server.serve_forever()
+    # print(http_server)
