@@ -94,7 +94,7 @@ def runModel():
             print(json.loads(error.read().decode("utf8", 'ignore')))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0",)
     # http_server = WSGIServer(('', 5000), app)
     # http_server.serve_forever()
     # print(http_server)
