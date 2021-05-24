@@ -5,15 +5,12 @@ import os
 import ssl
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from gevent.pywsgi import WSGIServer
 
 
 def allowSelfSignedHttps(allowed):
     # bypass the server certificate verification on client side
     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
-
-
 # this line is needed if you use self-signed certificate in your scoring service.
 allowSelfSignedHttps(True)
 
@@ -94,7 +91,4 @@ def runModel():
             print(json.loads(error.read().decode("utf8", 'ignore')))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",)
-    # http_server = WSGIServer(('', 5000), app)
-    # http_server.serve_forever()
-    # print(http_server)
+    app.run(debug=True)
